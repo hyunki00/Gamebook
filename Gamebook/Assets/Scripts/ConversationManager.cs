@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEditor.Experimental.GraphView;
 
 
 public class ConversationManager : MonoBehaviour
@@ -28,6 +29,7 @@ public class ConversationManager : MonoBehaviour
     private int currentID = 0;
     private int maxHP = 3;
     private int currentHP = 3;
+
 
     void Start()
     {
@@ -131,9 +133,27 @@ public class ConversationManager : MonoBehaviour
                         BackGround_img.gameObject.GetComponent<RectTransform>().DOShakePosition(duration: 0.5f, strength: 100, vibrato: 100);
                     }
                 }
-            }
+                int LeftOpacity = (int)dialogueData[idx]["LeftOpacity"];
+                int RightOpacity = (int)dialogueData[idx]["RightOpacity"];
+                if (LeftOpacity == 1)
+                {
+                characterRight.color = new Color(0.5f, 0.5f, 0.5f);
 
+                }
+                else
+                {
+                characterRight.color = new Color(1f, 1f, 1f);
+                }
+                if( RightOpacity == 1)
+                {
+                characterLeft.color = new Color(0.5f, 0.5f, 0.5f);
+                }
+                else
+                {
+                characterLeft.color = new Color(1f, 1f, 1f);
+                }
             }
+        }
     }
 
     void SetChoiceButtonActions(int id, int numOfChoices)
@@ -157,6 +177,7 @@ public class ConversationManager : MonoBehaviour
             }
         }
     }
+
 
     void OnChoiceButtonClick(int choiceTo, int choiceID)
     {
@@ -205,6 +226,7 @@ public class ConversationManager : MonoBehaviour
                 {
                     characterLeft.sprite = characterSprite;
                     characterLeft.color = new Color(1f, 1f, 1f, 1f); // 이미지가 표시되어야 하므로 완전히 불투명하게 설정
+
                 }
             }
         }
@@ -223,10 +245,13 @@ public class ConversationManager : MonoBehaviour
                 {
                     characterRight.sprite = characterSprite_R;
                     characterRight.color = new Color(1f, 1f, 1f, 1f); // 이미지가 표시되어야 하므로 완전히 불투명하게 설정
+
                 }
+
             }
         }
     }
+
     void UpdateBGImage(string imageName)
     {
         if (imageName != "-1")
