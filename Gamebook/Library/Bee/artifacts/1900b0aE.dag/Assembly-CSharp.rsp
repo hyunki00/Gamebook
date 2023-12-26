@@ -116,6 +116,7 @@
 -define:UNITY_POST_PROCESSING_STACK_V2
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/Plugins/Demigiant/DOTween/DOTween.dll"
 -r:"C:/Program Files/Unity 2021.3.33f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"C:/Program Files/Unity 2021.3.33f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
 -r:"C:/Program Files/Unity 2021.3.33f1/Editor/Data/Managed/UnityEngine/UnityEditor.DiagnosticsModule.dll"
@@ -325,6 +326,7 @@
 -r:"C:/Users/유용원/Documents/Gamebook/Gamebook/Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Cinemachine.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/com.unity.cinemachine.editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/DOTween.Modules.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Lofelt.NiceVibrations.Demo.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Lofelt.NiceVibrations.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Lofelt.NiceVibrations.ref.dll"
@@ -386,8 +388,11 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/Canvas.cs"
+"Assets/Scripts/ConversationManager.cs"
+"Assets/Scripts/CSVReader.cs"
 "Assets/Scripts/GameBookManager.cs"
 "Assets/Scripts/iconManager.cs"
+"Assets/Scripts/ShakeImage.cs"
 "Assets/Scripts/TitleManager.cs"
 -langversion:9.0
 
