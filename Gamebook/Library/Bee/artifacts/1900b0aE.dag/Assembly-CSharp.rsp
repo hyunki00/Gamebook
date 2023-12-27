@@ -330,6 +330,12 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/com.unity.cinemachine.editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/DOTween.Modules.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/DOTweenPro.Scripts.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Febucci.Attributes.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Febucci.Attributes.Runtime.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Febucci.TextAnimator.Demo.Runtime.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Febucci.TextAnimator.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Febucci.TextAnimator.Runtime.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Febucci.TextAnimator.TMP.Runtime.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/PsdPlugin.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Animation.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.2D.Animation.Runtime.ref.dll"
@@ -375,7 +381,6 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VisualStudio.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/Scripts/Canvas.cs"
 "Assets/Scripts/ConversationManager.cs"
 "Assets/Scripts/CSVReader.cs"
 "Assets/Scripts/FadeScript.cs"
@@ -383,6 +388,7 @@
 "Assets/Scripts/iconManager.cs"
 "Assets/Scripts/ShakeImage.cs"
 "Assets/Scripts/TitleManager.cs"
+"Assets/Scripts/Typewriter.cs"
 -langversion:9.0
 
 /deterministic

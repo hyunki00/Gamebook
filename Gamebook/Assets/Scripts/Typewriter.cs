@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Canvas : MonoBehaviour
+using Febucci.UI.Core;
+using TMPro;
+public abstract class TypewriterCore : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     void Start()
     {
         

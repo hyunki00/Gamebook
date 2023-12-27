@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.SceneManagement;
+using Febucci.UI.Core;
+
 
 
 public class ConversationManager : MonoBehaviour
@@ -23,7 +25,6 @@ public class ConversationManager : MonoBehaviour
     public Image BackGround_img;
     public Image BackGround_img_shake;
     public Image middleImage;
-
     public AudioSource bgmAudioSource;
     public AudioSource sfxAudioSource;
 
@@ -42,6 +43,8 @@ public class ConversationManager : MonoBehaviour
     public int conHP;
     private Dictionary<int, GameSnapshot> snapshots = new Dictionary<int, GameSnapshot>();
 
+
+   
     void Start()
     {
         LoadGame();
