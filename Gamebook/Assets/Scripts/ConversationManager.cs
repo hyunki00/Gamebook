@@ -154,6 +154,7 @@ public class ConversationManager : MonoBehaviour
             int dialogID = (int)dialogueData[idx]["ID"];
             if (dialogID == id)
             {
+                currentID++;
                 string characterName = dialogueData[idx]["Name"].ToString();
                 nameText.text = characterName;
 
@@ -236,24 +237,38 @@ public class ConversationManager : MonoBehaviour
                         BackGround_img.gameObject.GetComponent<RectTransform>().DOShakePosition(duration: 0.5f, strength: 100, vibrato: 100);
                     }
                 }
+
                 int LeftOpacity = (int)dialogueData[idx]["LeftOpacity"];
                 int RightOpacity = (int)dialogueData[idx]["RightOpacity"];
-                if (LeftOpacity == 1)
+                if (characterLeft.sprite == null)
                 {
-                    characterLeft.color = new Color(0.5f, 0.5f, 0.5f);
-
+                    characterLeft.color = new Color(1f, 1f, 1f, 0f);
                 }
                 else
                 {
-                    characterLeft.color = new Color(1f, 1f, 1f);
+                    if (LeftOpacity == 1)
+                    {
+                        characterLeft.color = new Color(0.5f, 0.5f, 0.5f);
+                    }
+                    else
+                    {
+                        characterLeft.color = new Color(1f, 1f, 1f);
+                    }
                 }
-                if( RightOpacity == 1)
+                if (characterRight.sprite == null)
                 {
-                    characterRight.color = new Color(0.5f, 0.5f, 0.5f);
+                    characterRight.color = new Color(1f, 1f, 1f, 0f);
                 }
                 else
                 {
-                    characterRight.color = new Color(1f, 1f, 1f);
+                    if (RightOpacity == 1)
+                    {
+                        characterRight.color = new Color(0.5f, 0.5f, 0.5f);
+                    }
+                    else
+                    {
+                        characterRight.color = new Color(1f, 1f, 1f);
+                    }
                 }
 
                 string bgmFileName = dialogueData[idx]["BGM"].ToString();
