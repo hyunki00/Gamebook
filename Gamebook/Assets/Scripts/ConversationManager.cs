@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using DG.Tweening;
+
 using UnityEditor.Experimental.GraphView;
 
 
@@ -21,12 +22,14 @@ public class ConversationManager : MonoBehaviour
     private Tween shakeTween_R;
     public Image BackGround_img;
     public Image BackGround_img_shake;
+    public Image middleImage;
 
     public AudioSource bgmAudioSource;
     public AudioSource sfxAudioSource;
 
     public GameObject lifeCountImg;
     public Image[] lifeCases;
+    
 
     private List<Dictionary<string, object>> dialogueData;
     private int currentID = 0;
@@ -140,20 +143,20 @@ public class ConversationManager : MonoBehaviour
                 int RightOpacity = (int)dialogueData[idx]["RightOpacity"];
                 if (LeftOpacity == 1)
                 {
-                characterRight.color = new Color(0.5f, 0.5f, 0.5f);
+                    characterLeft.color = new Color(0.5f, 0.5f, 0.5f);
 
                 }
                 else
                 {
-                characterRight.color = new Color(1f, 1f, 1f);
+                    characterLeft.color = new Color(1f, 1f, 1f);
                 }
                 if( RightOpacity == 1)
                 {
-                characterLeft.color = new Color(0.5f, 0.5f, 0.5f);
+                    characterRight.color = new Color(0.5f, 0.5f, 0.5f);
                 }
                 else
                 {
-                characterLeft.color = new Color(1f, 1f, 1f);
+                    characterRight.color = new Color(1f, 1f, 1f);
                 }
 
                 string bgmFileName = dialogueData[idx]["BGM"].ToString();
@@ -199,6 +202,37 @@ public class ConversationManager : MonoBehaviour
                         }
                     }
                 }
+
+                string middleImageName = dialogueData[idx]["MiddleImage"].ToString();
+                UpdateMiddleImage(middleImageName); // MiddleImage 업데이트 함수 호출
+
+                FadeScript fadeScript = FindObjectOfType<FadeScript>();
+                int effect = (int)dialogueData[idx]["Effect"];
+                if(effect != -1)
+                {
+                    if(effect == 1)
+                    {
+                        fadeScript.Fade();
+                    }
+                    else if(effect == 2)
+                    {
+                        fadeScript.white();
+                    }
+                    else if(effect ==3)
+                    {
+                        fadeScript.red();
+                        //red();
+                    }
+                    else if (effect == 4)
+                    {
+                        fadeScript.Green();
+                        //green();
+                    }
+                }
+
+
+
+
 
 
             }
@@ -348,6 +382,29 @@ public class ConversationManager : MonoBehaviour
         {
             // 게임 오버 로직 추가
             Debug.Log("게임 오버");
+        }
+    }
+
+    void UpdateMiddleImage(string imageName)
+    {
+        if (imageName != "-1")
+        {
+            if (imageName == "0")
+            {
+                // 이미지 삭제
+                middleImage.sprite = null; // 이미지 제거
+                middleImage.color = new Color(1f, 1f, 1f, 0f);
+            }
+            else
+            {
+                // 새로운 이미지 표시 (Resources/Image 경로에 있는 파일을 불러와 표시)
+                Sprite middleSprite = Resources.Load<Sprite>("Image/" + imageName);
+                if (middleSprite != null)
+                {
+                    middleImage.sprite = middleSprite;
+                    middleImage.color = new Color(1f, 1f, 1f, 1f);
+                }
+            }
         }
     }
 }

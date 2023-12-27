@@ -378,6 +378,7 @@
 "Assets/Scripts/Canvas.cs"
 "Assets/Scripts/ConversationManager.cs"
 "Assets/Scripts/CSVReader.cs"
+"Assets/Scripts/FadeScript.cs"
 "Assets/Scripts/GameBookManager.cs"
 "Assets/Scripts/iconManager.cs"
 "Assets/Scripts/ShakeImage.cs"
