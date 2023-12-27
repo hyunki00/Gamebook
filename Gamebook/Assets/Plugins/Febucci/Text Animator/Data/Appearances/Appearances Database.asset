@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Appearances Database
   m_EditorClassIdentifier: 
   data:
-  - {fileID: 11400000, guid: 7d5bd855a8aa3584f82afc3a8566e6f8, type: 2}
-  - {fileID: 11400000, guid: e9f33827e5315fc42b3454f213e75d0a, type: 2}
-  - {fileID: 11400000, guid: b4690d2f48e8f8d43bfa209391a7fe00, type: 2}
-  - {fileID: 11400000, guid: 38ce4feab4b2bb641944088c66ea3ff4, type: 2}
-  - {fileID: 11400000, guid: 65be9c582799860428e1a8ad765b0e60, type: 2}
-  - {fileID: 11400000, guid: 4134e3925b4257c49aa612dd549f70c8, type: 2}
-  - {fileID: 11400000, guid: 00e2bf7aa220d4a49b170828c1773a11, type: 2}
-  - {fileID: 11400000, guid: e2d225ff39594794ab22a1affd90f7a2, type: 2}
+  - {fileID: 11400000, guid: eb53721317edaa04092bfdb6cb2f6ac4, type: 2}
+  - {fileID: 11400000, guid: 9e4c1fba2e7e9e24ba09498108b25867, type: 2}
+  - {fileID: 11400000, guid: 6c56ccaa0d200db458b8437b428c9d36, type: 2}
+  - {fileID: 11400000, guid: 2c098b503ecd2c449bc7bff9fa275f7d, type: 2}
+  - {fileID: 11400000, guid: b39205977c9771749a95c05da0f5aa1b, type: 2}
+  - {fileID: 11400000, guid: e7fdc29fa099ef44a902e7507e56049b, type: 2}
+  - {fileID: 11400000, guid: 7b16f8114cd9fd04ba5044ec6ecf9863, type: 2}
+  - {fileID: 11400000, guid: 6d6b507981d46cd4fb7c9b5dbf694edf, type: 2}

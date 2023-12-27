@@ -6,11 +6,14 @@ using DG.Tweening;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.SceneManagement;
 using Febucci.UI.Core;
+using Febucci.UI;
+
 
 
 
 public class ConversationManager : MonoBehaviour
 {
+
     public string dialogueFileName = "Dialogue.csv";
     public TextMeshProUGUI dialogueText;
     public GameObject nextButton;
@@ -43,8 +46,8 @@ public class ConversationManager : MonoBehaviour
     public int conHP;
     private Dictionary<int, GameSnapshot> snapshots = new Dictionary<int, GameSnapshot>();
 
+    
 
-   
     void Start()
     {
         LoadGame();
@@ -52,6 +55,8 @@ public class ConversationManager : MonoBehaviour
         DisplayDialogue(currentID);
         conHP = currentHP;
         conID = currentID;
+        
+        
     }
     public void SaveGame()
     {
@@ -344,8 +349,7 @@ public class ConversationManager : MonoBehaviour
                         //green();
                     }
                 }
-
-
+               
 
 
 
@@ -353,6 +357,7 @@ public class ConversationManager : MonoBehaviour
             }
         }
     }
+    
 
     void SetChoiceButtonActions(int id, int numOfChoices)
     {

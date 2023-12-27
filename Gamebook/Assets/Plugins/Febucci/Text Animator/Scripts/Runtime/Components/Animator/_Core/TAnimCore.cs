@@ -1071,6 +1071,8 @@ namespace Febucci.UI.Core
         }
 
         int _maxVisibleCharacters = 0;
+        internal int visibleCharactersCount;
+
         /// <summary>
         /// Handles the very last character allowed to be visible in the text.
         /// </summary>

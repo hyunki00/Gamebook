@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Actions Database
   m_EditorClassIdentifier: 
   data:
-  - {fileID: 11400000, guid: eb47e1734cbb63d448bb9db404f235d3, type: 2}
-  - {fileID: 11400000, guid: 9430337892bbaf54994d849310b1fcdc, type: 2}
-  - {fileID: 11400000, guid: d9daf16c62c4e0747a1b4f421fc4db21, type: 2}
+  - {fileID: 11400000, guid: ea52ce37fbea92047a02568c3736fd8c, type: 2}
+  - {fileID: 11400000, guid: 1dcfe0ba9a7c5494d9a6c6d3ad4c19a0, type: 2}
+  - {fileID: 11400000, guid: 4bb9ce1d7ea01b44fb11564b337e0b41, type: 2}

@@ -1767,7 +1767,7 @@ GameObject:
   - component: {fileID: 416829442}
   - component: {fileID: 416829441}
   - component: {fileID: 416829444}
-  - component: {fileID: 416829443}
+  - component: {fileID: 416829445}
   m_Layer: 5
   m_Name: Dialogue_TMP
   m_TagString: Untagged
@@ -1901,7 +1901,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416829439}
   m_CullTransparentMesh: 1
---- !u!114 &416829443
+--- !u!114 &416829444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416829439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ace8ced0e81c847968cdca0aeda757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typewriterStartsAutomatically: 1
+  animationLoop: 0
+  timeScale: 0
+  _text: "\uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED
+    \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8
+    \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4
+    \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED
+    \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8
+    \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4
+    \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED
+    \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8
+    \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4
+    \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 "
+  useDynamicScaling: 1
+  referenceFontSize: 10
+  isResettingTimeOnNewText: 1
+  useDefaultDatabases: 1
+  databaseBehaviors: {fileID: 11400000, guid: 37cd3370c8fe7c34f9376007346261b6, type: 2}
+  databaseAppearances: {fileID: 11400000, guid: c6908e13593571f42afdf45b344825ed, type: 2}
+  useDefaultStyleSheet: 1
+  styleSheet: {fileID: 0}
+  databaseActions: {fileID: 11400000, guid: 12da1f0f744ee61418c2189001f3f482, type: 2}
+  defaultAppearancesTags: []
+  defaultDisappearancesTags: []
+  defaultBehaviorsTags: []
+  defaultTagsMode: 0
+--- !u!114 &416829445
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1935,55 +1973,15 @@ MonoBehaviour:
   onMessage:
     m_PersistentCalls:
       m_Calls: []
-  waitForNormalChars: 0.14
+  waitForNormalChars: 0.03
   waitLong: 0.6
-  waitMiddle: 0.2
+  waitMiddle: 0.81
   avoidMultiplePunctuactionWait: 0
   waitForNewLines: 1
   waitForLastCharacter: 1
   useTypewriterWaitForDisappearances: 1
-  disappearanceWaitTime: 1.01
-  disappearanceSpeedMultiplier: 0.13
---- !u!114 &416829444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416829439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8ace8ced0e81c847968cdca0aeda757, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  typewriterStartsAutomatically: 1
-  animationLoop: 0
-  timeScale: 0
-  _text: "\uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED
-    \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8
-    \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4
-    \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED
-    \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8
-    \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4
-    \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED
-    \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8
-    \uC601\uC5ED \uC785\uB2C8\uB2E4 \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4
-    \uD14D\uC2A4\uD2B8 \uC601\uC5ED \uC785\uB2C8\uB2E4 "
-  useDynamicScaling: 1
-  referenceFontSize: 10
-  isResettingTimeOnNewText: 1
-  useDefaultDatabases: 1
-  databaseBehaviors: {fileID: 11400000, guid: ab792a78ea3181d40a346638f47ca194, type: 2}
-  databaseAppearances: {fileID: 11400000, guid: ddd5734cd31611d43a0c4a8089454476, type: 2}
-  useDefaultStyleSheet: 1
-  styleSheet: {fileID: 0}
-  databaseActions: {fileID: 11400000, guid: 69e5acdb2a5e1ea4cb9953f73df1ae14, type: 2}
-  defaultAppearancesTags:
-  - size
-  defaultDisappearancesTags: []
-  defaultBehaviorsTags:
-  - incr
-  defaultTagsMode: 0
+  disappearanceWaitTime: 0.015
+  disappearanceSpeedMultiplier: 1
 --- !u!1 &417964421
 GameObject:
   m_ObjectHideFlags: 3
