@@ -325,7 +325,7 @@
 -r:"C:/Program Files/Unity 2021.3.33f1/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll"
 -r:"C:/Program Files/Unity 2021.3.33f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll"
 -r:"C:/Program Files/Unity 2021.3.33f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll"
--r:"C:/Users/기획/Documents/GitHub/Gamebook/Gamebook/Library/PackageCache/com.unity.burst@1.8.11/Unity.Burst.Unsafe.dll"
+-r:"C:/Users/유용원/Documents/Gamebook/Gamebook/Library/PackageCache/com.unity.burst@1.8.11/Unity.Burst.Unsafe.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Library/PackageCache/com.unity.burst@1.8.11/Runtime/BurstCompileAttribute.cs"

@@ -22,6 +22,9 @@ public class ConversationManager : MonoBehaviour
     public Image BackGround_img;
     public Image BackGround_img_shake;
 
+    public AudioSource bgmAudioSource;
+    public AudioSource sfxAudioSource;
+
     public GameObject lifeCountImg;
     public Image[] lifeCases;
 
@@ -152,6 +155,52 @@ public class ConversationManager : MonoBehaviour
                 {
                 characterLeft.color = new Color(1f, 1f, 1f);
                 }
+
+                string bgmFileName = dialogueData[idx]["BGM"].ToString();
+                if (bgmFileName != "-1")
+                {
+                    if (bgmFileName == "0")
+                    {
+                        // BGM 정지
+                        bgmAudioSource.Stop();
+                    }
+                    else
+                    {
+                        // BGM 재생 (Resources/BGM 경로에 있는 파일을 재생)
+                        AudioClip bgmClip = Resources.Load<AudioClip>("BGM/" + bgmFileName);
+
+                        if (bgmClip != null)
+                        {
+                            bgmAudioSource.clip = bgmClip;
+                            bgmAudioSource.loop = true; // BGM 반복 재생 설정
+                            bgmAudioSource.Play();
+                        }
+                    }
+                }
+
+
+                string sfxFileName = dialogueData[idx]["SFX"].ToString();
+                if (sfxFileName != "-1")
+                {
+                    if (sfxFileName == "0")
+                    {
+                        // SFX 정지
+                        sfxAudioSource.Stop();
+                    }
+                    else
+                    {
+                        // SFX 재생 (Resources/SFX 경로에 있는 파일을 재생)
+                        AudioClip sfxClip = Resources.Load<AudioClip>("SFX/" + sfxFileName);
+
+                        if (sfxClip != null)
+                        {
+                            sfxAudioSource.clip = sfxClip;
+                            sfxAudioSource.PlayOneShot(sfxClip);
+                        }
+                    }
+                }
+
+
             }
         }
     }
