@@ -154,7 +154,7 @@ public class ConversationManager : MonoBehaviour
             int dialogID = (int)dialogueData[idx]["ID"];
             if (dialogID == id)
             {
-                currentID++;
+                currentID= id;
                 string characterName = dialogueData[idx]["Name"].ToString();
                 nameText.text = characterName;
 

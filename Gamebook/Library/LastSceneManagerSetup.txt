@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/ingame.unity
+- path: Assets/YongWon/ingame.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
