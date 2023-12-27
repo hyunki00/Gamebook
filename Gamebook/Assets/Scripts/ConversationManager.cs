@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using DG.Tweening;
-
 using UnityEditor.Experimental.GraphView;
+using UnityEngine.SceneManagement;
 
 
 public class ConversationManager : MonoBehaviour
@@ -36,11 +36,108 @@ public class ConversationManager : MonoBehaviour
     private int maxHP = 3;
     private int currentHP = 3;
 
+    public int saveID;
+    public int conID;
+    public int saveHP;
+    public int conHP;
+    private Dictionary<int, GameSnapshot> snapshots = new Dictionary<int, GameSnapshot>();
 
     void Start()
     {
+        LoadGame();
         LoadDialogueData();
         DisplayDialogue(currentID);
+        conHP = currentHP;
+        conID = currentID;
+    }
+    public void SaveGame()
+    {
+        snapshots[currentID] = new GameSnapshot(currentID, currentHP);
+        PlayerPrefs.SetString("Snapshots", JsonUtility.ToJson(snapshots)); // 저장된 스냅샷을 PlayerPrefs에 문자열로 저장
+
+        // 다른 변수들도 저장...
+        PlayerPrefs.SetInt("CurrentID", currentID);
+        PlayerPrefs.SetInt("CurrentHP", currentHP);
+
+        PlayerPrefs.Save();
+    }
+
+    public void LoadGame()
+    {
+
+
+        if (PlayerPrefs.HasKey("CurrentID"))
+        {
+            currentID = PlayerPrefs.GetInt("CurrentID");
+        }
+
+        if (PlayerPrefs.HasKey("CurrentHP"))
+        {
+            currentHP = PlayerPrefs.GetInt("CurrentHP");
+        }
+
+        // 불러오기 시 저장된 스냅샷 복원
+        if (PlayerPrefs.HasKey("Snapshots"))
+        {
+            snapshots = JsonUtility.FromJson<Dictionary<int, GameSnapshot>>(PlayerPrefs.GetString("Snapshots"));
+        }
+        // 다른 변수들 불러오기...
+        // 추가적인 로직...
+    }
+
+
+
+    // 저장 버튼이 눌렸을 때 호출되는 메서드
+    public void OnSaveButtonClicked()
+    {
+        SaveGame();
+
+        Debug.Log(currentID);
+        saveID = currentID;
+        saveHP = currentHP;
+        conHP = currentHP;
+        conID = currentID;
+
+
+    }
+
+    // 불러오기 버튼이 눌렸을 때 호출되는 메서드
+    public void OnLoadButtonClicked()
+    {
+        saveID = conID;
+        saveHP = conHP;
+
+        LoadGame();
+        if (snapshots.ContainsKey(saveID))
+        {
+            RestoreSnapshot(snapshots[saveID]);
+            RestoreSnapshot(snapshots[saveHP]);
+        }
+
+        DisplayDialogue(saveID);
+        Debug.Log(saveID);
+    }
+
+    public void Continue()
+    {
+        LoadGame();
+        if (snapshots.ContainsKey(conID))
+        {
+            RestoreSnapshot(snapshots[conID]);
+            RestoreSnapshot(snapshots[conHP]);
+        }
+        DisplayDialogue(conID);
+        Debug.Log(conID);
+
+    }
+
+    void RestoreSnapshot(GameSnapshot snapshot)
+    {
+        currentID = snapshot.CurrentID;
+        currentHP = snapshot.CurrentHP;
+        // 다른 변수들 복원...
+
+        SaveGame(); // 복원된 상태를 다시 저장
     }
 
     void LoadDialogueData()
@@ -405,6 +502,20 @@ public class ConversationManager : MonoBehaviour
                     middleImage.color = new Color(1f, 1f, 1f, 1f);
                 }
             }
+        }
+
+
+    }
+    [System.Serializable]
+    public class GameSnapshot
+    {
+        public int CurrentID;
+        public int CurrentHP;
+
+        public GameSnapshot(int currentID, int currentHP)
+        {
+            CurrentID = currentID;
+            CurrentHP = currentHP;
         }
     }
 }
