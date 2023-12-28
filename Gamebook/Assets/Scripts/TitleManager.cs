@@ -13,8 +13,8 @@ public class TitleManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("CurrentID", 0);
         PlayerPrefs.SetInt("SaveID", 0);
-        PlayerPrefs.SetInt("CurrentHP", 0);
-        PlayerPrefs.SetInt("SaveHP", 0);
+        PlayerPrefs.SetInt("CurrentHP", 3);
+        PlayerPrefs.SetInt("SaveHP", 3);
 
         // ingame æ¿¿∏∑Œ ¿Ãµø
         SceneManager.LoadScene("ingame");

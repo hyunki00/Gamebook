@@ -13,7 +13,7 @@ using UnityEngine.EventSystems;
 
 
 
-public class ConversationManager : MonoBehaviour 
+public class ConversationManager : MonoBehaviour
 {
 
     public string dialogueFileName = "Dialogue.csv";
@@ -38,12 +38,14 @@ public class ConversationManager : MonoBehaviour
     public Image[] lifeCases;
     public Image GameOver;
     public bool isChoiceBtnClicked = false;
-    
+
 
     private List<Dictionary<string, object>> dialogueData;
     private int currentID = 0;
     private int maxHP = 3;
     private int currentHP = 3;
+    private string lastImageName;
+    private string savedImageName;
 
     public int saveID;
     public int conID;
@@ -51,7 +53,7 @@ public class ConversationManager : MonoBehaviour
     public int conHP;
     private Dictionary<int, GameSnapshot> snapshots = new Dictionary<int, GameSnapshot>();
 
-    
+
 
     void Start()
     {
@@ -63,22 +65,47 @@ public class ConversationManager : MonoBehaviour
         GameOver.gameObject.SetActive(false);
 
     }
+    // SaveGame 메서드 수정
+    // SaveGame 메서드 수정
+    // SaveGame 메서드 수정
+    // SaveGame 메서드 수정
     public void SaveGame()
     {
         snapshots[currentID] = new GameSnapshot(currentID, currentHP);
-        PlayerPrefs.SetString("Snapshots", JsonUtility.ToJson(snapshots)); // 저장된 스냅샷을 PlayerPrefs에 문자열로 저장
 
-        // 다른 변수들도 저장...
+        // 현재 대화 ID에 해당하는 데이터 가져오기
+        var currentDialogueData = dialogueData.Find(d => (int)d["ID"] == currentID);
+
+        if (!string.IsNullOrEmpty(lastImageName))
+        {
+            savedImageName = lastImageName;
+            PlayerPrefs.SetString("SavedImageName", savedImageName);
+        }
+        // 현재 대화에서의 배경 이미지 이름 가져오기
+        lastImageName = currentDialogueData["BGImage"].ToString();
+
+        // 이미지 파일명이 -1이 아닌 경우 PlayerPrefs에 저장
+        if (lastImageName != "-1")
+        {
+            PlayerPrefs.SetString("LastImageName", lastImageName);
+        }
+
+        Debug.Log("Game Saved - ID: " + currentID + ", HP: " + currentHP + ", Last Image: " + lastImageName);
+
+        PlayerPrefs.SetString("Snapshots", JsonUtility.ToJson(snapshots));
         PlayerPrefs.SetInt("CurrentID", currentID);
         PlayerPrefs.SetInt("CurrentHP", currentHP);
-
         PlayerPrefs.Save();
     }
 
+
+
+
+
+
     public void LoadGame()
     {
-
-
+        savedImageName = PlayerPrefs.GetString("SavedImageName", "");
         if (PlayerPrefs.HasKey("CurrentID"))
         {
             currentID = PlayerPrefs.GetInt("CurrentID");
@@ -94,11 +121,19 @@ public class ConversationManager : MonoBehaviour
         {
             snapshots = JsonUtility.FromJson<Dictionary<int, GameSnapshot>>(PlayerPrefs.GetString("Snapshots"));
         }
+
+        // 이전에 표시된 이미지 이름 불러오기
+        string lastImageName = PlayerPrefs.GetString("LastImageName", "");
+
+        // 이미지 파일이름이 있을 경우에만 업데이트
+        if (!string.IsNullOrEmpty(savedImageName))
+        {
+            UpdateBGImage(savedImageName);
+        }
+
         // 다른 변수들 불러오기...
         // 추가적인 로직...
     }
-
-
 
     // 저장 버튼이 눌렸을 때 호출되는 메서드
     public void OnSaveButtonClicked()
@@ -163,7 +198,7 @@ public class ConversationManager : MonoBehaviour
 
         for (int idx = 0; idx < dialogueData.Count; idx++)
         {
-            
+
             int dialogID = (int)dialogueData[idx]["ID"];
             if (dialogID == id)
             {
@@ -216,6 +251,11 @@ public class ConversationManager : MonoBehaviour
 
                 string bgImageName = dialogueData[idx]["BGImage"].ToString();
                 UpdateBGImage(bgImageName);
+                if (bgImageName != "-1")
+                {
+                    lastImageName = bgImageName;
+                }
+                Debug.Log("Last Image Name: " + lastImageName);
 
                 int isShake_L = (int)dialogueData[idx]["isShake_L"];
 
@@ -351,17 +391,17 @@ public class ConversationManager : MonoBehaviour
 
                 FadeScript fadeScript = FindObjectOfType<FadeScript>();
                 int effect = (int)dialogueData[idx]["Effect"];
-                if(effect != -1)
+                if (effect != -1)
                 {
-                    if(effect == 1)
+                    if (effect == 1)
                     {
                         fadeScript.Fade();
                     }
-                    else if(effect == 2)
+                    else if (effect == 2)
                     {
                         fadeScript.white();
                     }
-                    else if(effect ==3)
+                    else if (effect == 3)
                     {
                         fadeScript.red();
                         //red();
@@ -372,7 +412,7 @@ public class ConversationManager : MonoBehaviour
                         //green();
                     }
                 }
-               
+
 
 
 
@@ -380,8 +420,8 @@ public class ConversationManager : MonoBehaviour
             }
         }
     }
-    
-    
+
+
     void SetChoiceButtonActions(int id, int numOfChoices)
     {
         int nextId = id + 1;
@@ -417,10 +457,10 @@ public class ConversationManager : MonoBehaviour
         nextButton.SetActive(true);
         nextButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => DisplayDialogue(nextID));
-        
+
     }
- 
-    
+
+
 
     void ClearChoiceButtons()
     {
@@ -509,7 +549,7 @@ public class ConversationManager : MonoBehaviour
         }
     }
 
-        void UpdateHPUI(int id)
+    void UpdateHPUI(int id)
     {
         int hpValue = (int)dialogueData[id]["HP"];
         currentHP += hpValue;
