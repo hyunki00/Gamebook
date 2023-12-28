@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace Febucci.UI.Core
-
 {
     /// <summary>
     /// Base class for all Typewriters. <br/>
@@ -19,11 +18,8 @@ namespace Febucci.UI.Core
     /// </remarks>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Core.TAnimCore))]
-
-    
     public abstract class TypewriterCore : MonoBehaviour
     {
-        
         [System.Flags]
         public enum StartTypewriterMode
         {
@@ -174,7 +170,6 @@ namespace Febucci.UI.Core
         /// <remarks>
         /// If the typewriter is enabled but its start mode <see cref="startTypewriterMode"/> doesn't include <see cref="StartTypewriterMode.OnShowText"/>, this method won't start showing letters. You'd have to manually call <see cref="StartShowingText"/> in order to start the typewriter, or include different "start modes" like <see cref="StartTypewriterMode.OnEnable"/> and let the script manage it automatically.
         /// </remarks>
-        /// 
         public void ShowText(string text)
         {
             // --- SETS TEXT ---
@@ -193,7 +188,8 @@ namespace Febucci.UI.Core
             else if (startTypewriterMode.HasFlag(StartTypewriterMode.OnShowText))
                 StartShowingText(true);
         }
- 
+
+        
         /// <summary>
         /// Skips the typewriter animation (if it's currently showing).<br/>
         /// In case the text is revealing, it will show all the letters immediately.<br/>
@@ -202,16 +198,12 @@ namespace Febucci.UI.Core
         /// <remarks>
         /// If both revealing and hiding are occurring, hiding will prevail.
         /// </remarks>
-
-
         public void SkipTypewriter()
         {
             if (isShowingText)
             {
-           
                 StopAllCoroutines();
                 isShowingText = false;
-
                 
                 TextAnimator.SetVisibilityEntireText(true, !hideAppearancesOnSkip);
                 
@@ -237,7 +229,7 @@ namespace Febucci.UI.Core
             }
         }
 
-
+        
         #region Typewriter
 
         #region Appearing
@@ -253,7 +245,6 @@ namespace Febucci.UI.Core
         /// <param name="restart"><code>false</code> if you want the typewriter to resume where it has left. <code>true</code> if the typewriter should restart from character 0</param>
         public void StartShowingText(bool restart = false)
         {
-
             if(TextAnimator.CharactersCount==0) return;
             
             if (!useTypeWriter)
@@ -262,10 +253,10 @@ namespace Febucci.UI.Core
                 return;
             }
 
-           /* if (isShowingText)
+            if (isShowingText)
             {
                 StopShowingText();
-            }*/
+            }
 
             if (restart)
             {
@@ -301,9 +292,6 @@ namespace Febucci.UI.Core
             // --- SHOWS TEXT LETTERS ---
             for(int i=0;i<TextAnimator.CharactersCount;i++)
             {
-                
-                
-
                 // -- actions --
                 if (actionsEnabled)
                 {

@@ -7,11 +7,13 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.SceneManagement;
 using Febucci.UI.Core;
 using Febucci.UI;
+using UnityEngine.EventSystems;
 
 
 
 
-public class ConversationManager : MonoBehaviour
+
+public class ConversationManager : MonoBehaviour 
 {
 
     public string dialogueFileName = "Dialogue.csv";
@@ -30,7 +32,8 @@ public class ConversationManager : MonoBehaviour
     public Image middleImage;
     public AudioSource bgmAudioSource;
     public AudioSource sfxAudioSource;
-
+    public TypewriterByCharacter Skipwriter;
+    public Image NameBox;
     public GameObject lifeCountImg;
     public Image[] lifeCases;
     
@@ -150,7 +153,7 @@ public class ConversationManager : MonoBehaviour
 
     void LoadDialogueData()
     {
-        dialogueData = CSVReader.Read("DialgueTest01");
+        dialogueData = CSVReader.Read("Dialogue");
     }
 
     void DisplayDialogue(int id)
@@ -159,12 +162,28 @@ public class ConversationManager : MonoBehaviour
 
         for (int idx = 0; idx < dialogueData.Count; idx++)
         {
+            if (Skipwriter.isShowingText)
+            {
+                Skipwriter.SkipTypewriter();
+                return;
+
+            }
             int dialogID = (int)dialogueData[idx]["ID"];
             if (dialogID == id)
             {
                 currentID= id;
                 string characterName = dialogueData[idx]["Name"].ToString();
-                nameText.text = characterName;
+                if (characterName == "")
+                {
+
+                    NameBox.color = new Color(1f, 1f, 1f, 0f);
+                    nameText.text = characterName;
+                }
+                else
+                {
+                    NameBox.color = new Color(1f, 1f, 1f, 1f);
+                    nameText.text = characterName;
+                }
 
                 string dialogContent = dialogueData[idx]["Dialog"].ToString();
                 dialogueText.text = dialogContent;
@@ -358,7 +377,7 @@ public class ConversationManager : MonoBehaviour
         }
     }
     
-
+    
     void SetChoiceButtonActions(int id, int numOfChoices)
     {
         int nextId = id + 1;
@@ -392,7 +411,10 @@ public class ConversationManager : MonoBehaviour
         nextButton.SetActive(true);
         nextButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => DisplayDialogue(nextID));
+        
     }
+ 
+    
 
     void ClearChoiceButtons()
     {

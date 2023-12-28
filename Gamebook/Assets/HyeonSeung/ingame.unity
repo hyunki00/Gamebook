@@ -1929,7 +1929,7 @@ MonoBehaviour:
   useDynamicScaling: 1
   referenceFontSize: 10
   isResettingTimeOnNewText: 1
-  useDefaultDatabases: 1
+  useDefaultDatabases: 0
   databaseBehaviors: {fileID: 11400000, guid: 37cd3370c8fe7c34f9376007346261b6, type: 2}
   databaseAppearances: {fileID: 11400000, guid: c6908e13593571f42afdf45b344825ed, type: 2}
   useDefaultStyleSheet: 1
@@ -2270,7 +2270,6 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
@@ -2338,18 +2337,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0a82a086afdc494db67a8b50f091d1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2846,7 +2833,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 752882100}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1839952608}
+        m_TargetAssemblyTypeName: ConversationManager, Assembly-CSharp
+        m_MethodName: SkipButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &752882100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5219,6 +5218,8 @@ MonoBehaviour:
   middleImage: {fileID: 835751030}
   bgmAudioSource: {fileID: 1839952611}
   sfxAudioSource: {fileID: 339522222}
+  Skipwriter: {fileID: 416829445}
+  NameBox: {fileID: 176004964}
   lifeCountImg: {fileID: 1566183508}
   lifeCases:
   - {fileID: 92838915}
