@@ -36,6 +36,8 @@ public class ConversationManager : MonoBehaviour
     public Image NameBox;
     public GameObject lifeCountImg;
     public Image[] lifeCases;
+    public Image GameOver;
+    public bool isChoiceBtnClicked = false;
     
 
     private List<Dictionary<string, object>> dialogueData;
@@ -58,8 +60,8 @@ public class ConversationManager : MonoBehaviour
         DisplayDialogue(currentID);
         conHP = currentHP;
         conID = currentID;
-        
-        
+        GameOver.gameObject.SetActive(false);
+
     }
     public void SaveGame()
     {
@@ -124,7 +126,7 @@ public class ConversationManager : MonoBehaviour
             RestoreSnapshot(snapshots[saveID]);
             RestoreSnapshot(snapshots[saveHP]);
         }
-
+        GameOver.gameObject.SetActive(false);
         DisplayDialogue(saveID);
         Debug.Log(saveID);
     }
@@ -139,7 +141,6 @@ public class ConversationManager : MonoBehaviour
         }
         DisplayDialogue(conID);
         Debug.Log(conID);
-
     }
 
     void RestoreSnapshot(GameSnapshot snapshot)
@@ -162,16 +163,19 @@ public class ConversationManager : MonoBehaviour
 
         for (int idx = 0; idx < dialogueData.Count; idx++)
         {
-            if (Skipwriter.isShowingText)
-            {
-                Skipwriter.SkipTypewriter();
-                return;
-
-            }
+            
             int dialogID = (int)dialogueData[idx]["ID"];
             if (dialogID == id)
             {
-                currentID= id;
+                Debug.Log(id);
+                if (Skipwriter.isShowingText && isChoiceBtnClicked == false)
+                {
+                    Skipwriter.SkipTypewriter();
+                    return;
+
+                }
+                isChoiceBtnClicked = false;
+                currentID = id;
                 string characterName = dialogueData[idx]["Name"].ToString();
                 if (characterName == "")
                 {
@@ -403,6 +407,8 @@ public class ConversationManager : MonoBehaviour
 
     void OnChoiceButtonClick(int choiceTo, int choiceID)
     {
+        isChoiceBtnClicked = true;
+        Debug.Log(choiceTo);
         DisplayDialogue(choiceTo);
     }
 
@@ -524,6 +530,7 @@ public class ConversationManager : MonoBehaviour
         {
             // 게임 오버 로직 추가
             Debug.Log("게임 오버");
+            GameOver.gameObject.SetActive(true);
         }
     }
 
