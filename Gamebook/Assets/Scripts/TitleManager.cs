@@ -12,24 +12,34 @@ public class TitleManager : MonoBehaviour
     public Image titleImage;
     Sequence TitleSequence;
 
-    public void Awake()
-    {
-    }
+
+    Vector3 EndSize = new Vector3(0.8f, 0.8f);
+    Vector3 StartSize;
 
     public void Start()
     {
 
-        TitleSequence = DOTween.Sequence()
-            .OnStart(() =>
-            {
-                transform.localScale = Vector3.zero;
+        TitleSequence = DOTween.Sequence();
+        TitleSequence.Append(StartSequence());
+        StartSize = titleImage.rectTransform.localScale;
+    }
+    Sequence StartSequence()
+    {
+        return DOTween.Sequence()
+        .OnStart(() =>
+        {
+            titleImage.color = new Color(1f, 1f, 1f, 1f);
 
-            }
-                )
-            .Append(transform.DOScale(1, 1).SetEase(Ease.OutBounce))
-            .Join(GetComponent<Image>().DOFade(1f, 1.5f))
-            .SetDelay(0.5f);
-        
+        }
+            )
+
+        .Append(titleImage.rectTransform.DOScale(EndSize,1f).SetEase(Ease.InOutCubic))
+        .Join(titleImage.DOColor(new Color(1f, 1f, 1f, 0.4f), 1f))
+        .SetDelay(0.5f)
+        .SetLoops(-1, LoopType.Yoyo);
+    }
+    void OnEnable()
+    {
 
     }
 
