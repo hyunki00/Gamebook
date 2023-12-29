@@ -1,5 +1,5 @@
-﻿ID,Branch,Name,Dialog,Image_L,LeftOpacity,isShake_L,Image_R,RightOpacity,isShake_R,BGImage,isCameraShake,IsChoice,ChoiceTo,HP,BGM,SFX,MiddleImage,Effect,Etc,End
-0,-1,,마르고 화창한 하늘 아래,0,-1,-1,0,-1,-1,ground,-1,-1,-1,0,-1,-1,0,-1,-1,0
+ID,Branch,Name,Dialog,Image_L,LeftOpacity,isShake_L,Image_R,RightOpacity,isShake_R,BGImage,isCameraShake,IsChoice,ChoiceTo,HP,BGM,SFX,MiddleImage,Effect,Etc,End
+0,-1,,마르고 화창한 하늘 아래,0,-1,-1,0,-1,-1,ground,-1,-1,-1,0,-1,-1,haha,-1,-1,0
 1,-1,,오늘도 하나의 탐험가 파티가 결성된다.,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,0
 2,-1,남자 탐험가A,야 신입!!! 뭐해!!!!,-1,-1,-1,mob1,1,1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1
 3,-1,서연,네! 넵. 지금 갑니다! 가요!,suyeon1,1,1,0,-1,-1,-1,-1,-1,-1,0,-1,-1,-1,-1,-1,-1

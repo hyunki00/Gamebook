@@ -34,7 +34,7 @@ public class TitleManager : MonoBehaviour
             )
 
         .Append(titleImage.rectTransform.DOScale(EndSize,1f).SetEase(Ease.InOutCubic))
-        .Join(titleImage.DOColor(new Color(1f, 1f, 1f, 0.4f), 1f))
+        .Join(titleImage.DOColor(new Color(1f, 1f, 1f, 0.8f), 1f))
         .SetDelay(0.5f)
         .SetLoops(-1, LoopType.Yoyo);
     }

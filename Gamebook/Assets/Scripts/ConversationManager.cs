@@ -175,6 +175,7 @@ public class ConversationManager : MonoBehaviour
         saveHP = currentHP;
         conHP = currentHP;
         conID = currentID;
+        savedImageName = lastImageName;
 
 
     }
@@ -372,11 +373,11 @@ public class ConversationManager : MonoBehaviour
                 {
                     if (LeftOpacity == 1)
                     {
-                        characterLeft.color = new Color(0.5f, 0.5f, 0.5f);
+                        characterLeft.color = new Color(1f, 1f, 1f);
                     }
                     else
                     {
-                        characterLeft.color = new Color(1f, 1f, 1f);
+                        characterLeft.color = new Color(0.5f, 0.5f, 0.5f);
                     }
                 }
                 if (characterRight.sprite == null)
@@ -387,11 +388,11 @@ public class ConversationManager : MonoBehaviour
                 {
                     if (RightOpacity == 1)
                     {
-                        characterRight.color = new Color(0.5f, 0.5f, 0.5f);
+                        characterRight.color = new Color(1f, 1f, 1f);
                     }
                     else
                     {
-                        characterRight.color = new Color(1f, 1f, 1f);
+                        characterRight.color = new Color(0.5f, 0.5f, 0.5f);
                     }
                 }
 
