@@ -3,11 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class TitleManager : MonoBehaviour
 {
     GameObject startbutton;
     public ConversationManager conversationManager;
+    public Image titleImage;
+    Sequence TitleSequence;
+
+    public void Awake()
+    {
+    }
+
+    public void Start()
+    {
+
+        TitleSequence = DOTween.Sequence()
+            .OnStart(() =>
+            {
+                transform.localScale = Vector3.zero;
+
+            }
+                )
+            .Append(transform.DOScale(1, 1).SetEase(Ease.OutBounce))
+            .Join(GetComponent<Image>().DOFade(1f, 1.5f))
+            .SetDelay(0.5f);
+        
+
+    }
 
     public void StartButton()
     {
@@ -54,4 +78,5 @@ public class TitleManager : MonoBehaviour
         conversationManager.Continue();
         conversationManager.SaveGame();
     }
+
 }
