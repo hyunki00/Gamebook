@@ -2585,6 +2585,7 @@ GameObject:
   - component: {fileID: 614409877}
   - component: {fileID: 614409876}
   - component: {fileID: 614409875}
+  - component: {fileID: 614409878}
   m_Layer: 5
   m_Name: ChaArea_Canvas
   m_TagString: Untagged
@@ -2675,6 +2676,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &614409878
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614409873}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &688017098
 GameObject:
   m_ObjectHideFlags: 0
@@ -5921,6 +5934,11 @@ MonoBehaviour:
   - {fileID: 2038666864}
   GameOver: {fileID: 1627634053}
   isChoiceBtnClicked: 0
+  ChaArea_Canvas: {fileID: 614409878}
+  TextBox_img: {fileID: 594089898}
+  endImage: {fileID: 0}
+  load_btn: {fileID: 1440666015}
+  save_btn: {fileID: 1869559641}
   saveID: 0
   conID: 0
   saveHP: 0

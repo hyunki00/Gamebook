@@ -5893,24 +5893,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueFileName: Dialogue.csv
-  dialogueText: {fileID: 0}
-  nextButton: {fileID: 0}
-  choiceGroupImg: {fileID: 0}
-  choiceBoxes: []
-  choiceTexts: []
-  nameText: {fileID: 0}
-  characterLeft: {fileID: 0}
-  characterRight: {fileID: 0}
-  BackGround_img: {fileID: 0}
-  BackGround_img_shake: {fileID: 0}
-  middleImage: {fileID: 0}
-  bgmAudioSource: {fileID: 0}
-  sfxAudioSource: {fileID: 0}
-  Skipwriter: {fileID: 0}
-  NameBox: {fileID: 0}
-  lifeCountImg: {fileID: 0}
-  lifeCases: []
-  GameOver: {fileID: 0}
+  dialogueText: {fileID: 416829441}
+  nextButton: {fileID: 752882097}
+  choiceGroupImg: {fileID: 85062878}
+  choiceBoxes:
+  - {fileID: 983080392}
+  - {fileID: 1316148741}
+  - {fileID: 1629498116}
+  choiceTexts:
+  - {fileID: 1490232487}
+  - {fileID: 74826820}
+  - {fileID: 306552033}
+  nameText: {fileID: 1308575664}
+  characterLeft: {fileID: 986554294}
+  characterRight: {fileID: 303600683}
+  BackGround_img: {fileID: 1582786402}
+  BackGround_img_shake: {fileID: 451655100}
+  middleImage: {fileID: 835751030}
+  bgmAudioSource: {fileID: 1839952611}
+  sfxAudioSource: {fileID: 339522222}
+  Skipwriter: {fileID: 416829445}
+  NameBox: {fileID: 176004964}
+  lifeCountImg: {fileID: 1566183508}
+  lifeCases:
+  - {fileID: 92838915}
+  - {fileID: 108845831}
+  - {fileID: 2038666864}
+  GameOver: {fileID: 1627634053}
   isChoiceBtnClicked: 0
   saveID: 0
   conID: 0

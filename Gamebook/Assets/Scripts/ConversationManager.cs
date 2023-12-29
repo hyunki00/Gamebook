@@ -38,6 +38,11 @@ public class ConversationManager : MonoBehaviour
     public Image[] lifeCases;
     public Image GameOver;
     public bool isChoiceBtnClicked = false;
+    public CanvasGroup ChaArea_Canvas;
+    public Image TextBox_img;
+    public Sprite endImage;
+    public Button load_btn;
+    public Button save_btn;
 
 
     private List<Dictionary<string, object>> dialogueData;
@@ -235,7 +240,30 @@ public class ConversationManager : MonoBehaviour
 
                 }
                 isChoiceBtnClicked = false;
+
                 currentID = id;
+
+                int end = (int)dialogueData[idx]["End"];
+                if (end > 0)
+                {
+                    string enddialogContent = dialogueData[idx]["Dialog"].ToString();
+                    dialogueText.text = enddialogContent;
+
+                    endImage = Resources.Load<Sprite>("BG/" + dialogueData[idx]["BGImage"].ToString());
+                    BackGround_img.DOColor(Color.clear, 3f).OnComplete(()=> ChangeImage());
+                    BackGround_img_shake.DOColor(Color.clear, 3f).OnComplete(() => ChangeImage());
+
+                    ChaArea_Canvas.alpha = 0;
+                    TextBox_img.gameObject.SetActive(false);
+                    save_btn.gameObject.SetActive(false);
+                    load_btn.gameObject.SetActive(false);
+                    lifeCountImg.gameObject.SetActive(false);
+                    nextButton.gameObject.SetActive(false);
+
+                    return;
+
+                }
+
                 string characterName = dialogueData[idx]["Name"].ToString();
                 if (characterName == "")
                 {
@@ -631,7 +659,33 @@ public class ConversationManager : MonoBehaviour
 
 
         }
+
+    void ChangeImage()
+    {
+        // 이미지 변경
+        BackGround_img.sprite = endImage;
+        BackGround_img_shake.sprite = endImage;
+
+        // Dotween을 사용하여 이미지를 서서히 나타나게 함
+        BackGround_img.DOColor(Color.white, 3f);
+        BackGround_img_shake.DOColor(Color.white, 3f).OnComplete(()=> Ending());
     }
+    void Ending()
+    {
+        ChaArea_Canvas.alpha = 1;
+        TextBox_img.gameObject.SetActive(true);
+        save_btn.gameObject.SetActive(false);
+        load_btn.gameObject.SetActive(false);
+        Invoke("LoadTitleScene",3);
+
+
+    }
+
+    void LoadTitleScene()
+    {
+        SceneManager.LoadScene("Title");
+    }
+}
     [System.Serializable]
     public class GameSnapshot
     {
