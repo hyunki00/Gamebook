@@ -7,8 +7,6 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.SceneManagement;
 using Febucci.UI.Core;
 using Febucci.UI;
-using UnityEngine.EventSystems;
-
 
 
 
@@ -32,34 +30,23 @@ public class ConversationManager : MonoBehaviour
     public Image middleImage;
     public AudioSource bgmAudioSource;
     public AudioSource sfxAudioSource;
-    public TypewriterByCharacter Skipwriter;
-    public Image NameBox;
+
     public GameObject lifeCountImg;
     public Image[] lifeCases;
-    public Image GameOver;
-    public bool isChoiceBtnClicked = false;
-    public CanvasGroup ChaArea_Canvas;
-    public Image TextBox_img;
-    public Sprite endImage;
-    public Button load_btn;
-    public Button save_btn;
-
+    
 
     private List<Dictionary<string, object>> dialogueData;
     private int currentID = 0;
     private int maxHP = 3;
     private int currentHP = 3;
-    private string lastImageName;
-    private string savedImageName;
-    private string lastMiddleImageName;
-    private string savedMiddleImageName;
+
     public int saveID;
     public int conID;
     public int saveHP;
     public int conHP;
     private Dictionary<int, GameSnapshot> snapshots = new Dictionary<int, GameSnapshot>();
 
-
+    
 
     void Start()
     {
@@ -68,67 +55,24 @@ public class ConversationManager : MonoBehaviour
         DisplayDialogue(currentID);
         conHP = currentHP;
         conID = currentID;
-        GameOver.gameObject.SetActive(false);
-
+        
+        
     }
-    // SaveGame 메서드 수정
-    // SaveGame 메서드 수정
-    // SaveGame 메서드 수정
-    // SaveGame 메서드 수정
     public void SaveGame()
     {
         snapshots[currentID] = new GameSnapshot(currentID, currentHP);
+        PlayerPrefs.SetString("Snapshots", JsonUtility.ToJson(snapshots)); // 저장된 스냅샷을 PlayerPrefs에 문자열로 저장
 
-        // 현재 대화 ID에 해당하는 데이터 가져오기
-        var currentDialogueData = dialogueData.Find(d => (int)d["ID"] == currentID);
-
-
-        if (!string.IsNullOrEmpty(lastImageName))
-        {
-            savedImageName = lastImageName;
-            PlayerPrefs.SetString("SavedImageName", savedImageName);
-        }
-
-        if (!string.IsNullOrEmpty(lastMiddleImageName))
-        {
-            savedMiddleImageName = lastMiddleImageName;
-            PlayerPrefs.SetString("SavedMiddleImageName", savedMiddleImageName);
-        }
-
-        // 현재 대화에서의 배경 이미지 이름 가져오기
-        lastImageName = currentDialogueData["BGImage"].ToString();
-        // 현재 대화에서의 Middle 이미지 이름 가져오기
-        lastMiddleImageName = currentDialogueData["MiddleImage"].ToString();
-        // 이미지 파일명이 -1이 아닌 경우 PlayerPrefs에 저장
-        if (lastMiddleImageName != "-1")
-    {
-        PlayerPrefs.SetString("savedMiddleImageName", savedMiddleImageName);
-    }
-
-
-        // 이미지 파일명이 -1이 아닌 경우 PlayerPrefs에 저장
-        if (lastImageName != "-1")
-        {
-            PlayerPrefs.SetString("LastImageName", lastImageName);
-        }
-
-        Debug.Log("Game Saved - ID: " + currentID + ", HP: " + currentHP + ", Last Image: " + lastImageName);
-
-        PlayerPrefs.SetString("Snapshots", JsonUtility.ToJson(snapshots));
+        // 다른 변수들도 저장...
         PlayerPrefs.SetInt("CurrentID", currentID);
         PlayerPrefs.SetInt("CurrentHP", currentHP);
+
         PlayerPrefs.Save();
     }
 
-
-
-
-
-
     public void LoadGame()
     {
-        savedImageName = PlayerPrefs.GetString("SavedImageName", "");
-        savedMiddleImageName = PlayerPrefs.GetString("SavedMiddleImageName", "");
+
 
         if (PlayerPrefs.HasKey("CurrentID"))
         {
@@ -145,25 +89,11 @@ public class ConversationManager : MonoBehaviour
         {
             snapshots = JsonUtility.FromJson<Dictionary<int, GameSnapshot>>(PlayerPrefs.GetString("Snapshots"));
         }
-
-        // 이전에 표시된 이미지 이름 불러오기
-        string lastImageName = PlayerPrefs.GetString("LastImageName", "");
-        lastMiddleImageName = PlayerPrefs.GetString("LastMiddleImageName", "");
-
-        // 이미지 파일이름이 있을 경우에만 업데이트
-        if (!string.IsNullOrEmpty(savedImageName))
-        {
-            UpdateBGImage(savedImageName);
-        }
-        if (!string.IsNullOrEmpty(savedMiddleImageName))
-        {
-            UpdateMiddleImage(savedMiddleImageName);
-        }
-
-
         // 다른 변수들 불러오기...
         // 추가적인 로직...
     }
+
+
 
     // 저장 버튼이 눌렸을 때 호출되는 메서드
     public void OnSaveButtonClicked()
@@ -175,7 +105,6 @@ public class ConversationManager : MonoBehaviour
         saveHP = currentHP;
         conHP = currentHP;
         conID = currentID;
-        savedImageName = lastImageName;
 
 
     }
@@ -192,7 +121,7 @@ public class ConversationManager : MonoBehaviour
             RestoreSnapshot(snapshots[saveID]);
             RestoreSnapshot(snapshots[saveHP]);
         }
-        GameOver.gameObject.SetActive(false);
+
         DisplayDialogue(saveID);
         Debug.Log(saveID);
     }
@@ -207,6 +136,7 @@ public class ConversationManager : MonoBehaviour
         }
         DisplayDialogue(conID);
         Debug.Log(conID);
+
     }
 
     void RestoreSnapshot(GameSnapshot snapshot)
@@ -229,54 +159,12 @@ public class ConversationManager : MonoBehaviour
 
         for (int idx = 0; idx < dialogueData.Count; idx++)
         {
-
             int dialogID = (int)dialogueData[idx]["ID"];
             if (dialogID == id)
             {
-                Debug.Log(id);
-                if (Skipwriter.isShowingText && isChoiceBtnClicked == false)
-                {
-                    Skipwriter.SkipTypewriter();
-                    return;
-
-                }
-                isChoiceBtnClicked = false;
-
-                currentID = id;
-
-                int end = (int)dialogueData[idx]["End"];
-                if (end > 0)
-                {
-                    string enddialogContent = dialogueData[idx]["Dialog"].ToString();
-                    dialogueText.text = enddialogContent;
-
-                    endImage = Resources.Load<Sprite>("BG/" + dialogueData[idx]["BGImage"].ToString());
-                    BackGround_img.DOColor(Color.clear, 3f).OnComplete(()=> ChangeImage());
-                    BackGround_img_shake.DOColor(Color.clear, 3f).OnComplete(() => ChangeImage());
-
-                    ChaArea_Canvas.alpha = 0;
-                    TextBox_img.gameObject.SetActive(false);
-                    save_btn.gameObject.SetActive(false);
-                    load_btn.gameObject.SetActive(false);
-                    lifeCountImg.gameObject.SetActive(false);
-                    nextButton.gameObject.SetActive(false);
-
-                    return;
-
-                }
-
+                currentID= id;
                 string characterName = dialogueData[idx]["Name"].ToString();
-                if (characterName == "")
-                {
-
-                    NameBox.color = new Color(1f, 1f, 1f, 0f);
-                    nameText.text = characterName;
-                }
-                else
-                {
-                    NameBox.color = new Color(1f, 1f, 1f, 1f);
-                    nameText.text = characterName;
-                }
+                nameText.text = characterName;
 
                 string dialogContent = dialogueData[idx]["Dialog"].ToString();
                 dialogueText.text = dialogContent;
@@ -305,11 +193,6 @@ public class ConversationManager : MonoBehaviour
 
                 string bgImageName = dialogueData[idx]["BGImage"].ToString();
                 UpdateBGImage(bgImageName);
-                if (bgImageName != "-1")
-                {
-                    lastImageName = bgImageName;
-                }
-                Debug.Log("Last Image Name: " + lastImageName);
 
                 int isShake_L = (int)dialogueData[idx]["isShake_L"];
 
@@ -373,11 +256,11 @@ public class ConversationManager : MonoBehaviour
                 {
                     if (LeftOpacity == 1)
                     {
-                        characterLeft.color = new Color(1f, 1f, 1f);
+                        characterLeft.color = new Color(0.5f, 0.5f, 0.5f);
                     }
                     else
                     {
-                        characterLeft.color = new Color(0.5f, 0.5f, 0.5f);
+                        characterLeft.color = new Color(1f, 1f, 1f);
                     }
                 }
                 if (characterRight.sprite == null)
@@ -388,11 +271,11 @@ public class ConversationManager : MonoBehaviour
                 {
                     if (RightOpacity == 1)
                     {
-                        characterRight.color = new Color(1f, 1f, 1f);
+                        characterRight.color = new Color(0.5f, 0.5f, 0.5f);
                     }
                     else
                     {
-                        characterRight.color = new Color(0.5f, 0.5f, 0.5f);
+                        characterRight.color = new Color(1f, 1f, 1f);
                     }
                 }
 
@@ -442,24 +325,20 @@ public class ConversationManager : MonoBehaviour
 
                 string middleImageName = dialogueData[idx]["MiddleImage"].ToString();
                 UpdateMiddleImage(middleImageName); // MiddleImage 업데이트 함수 호출
-                if (middleImageName != "-1")
-                {
-                    lastMiddleImageName = middleImageName;
-                }
 
                 FadeScript fadeScript = FindObjectOfType<FadeScript>();
                 int effect = (int)dialogueData[idx]["Effect"];
-                if (effect != -1)
+                if(effect != -1)
                 {
-                    if (effect == 1)
+                    if(effect == 1)
                     {
                         fadeScript.Fade();
                     }
-                    else if (effect == 2)
+                    else if(effect == 2)
                     {
                         fadeScript.white();
                     }
-                    else if (effect == 3)
+                    else if(effect ==3)
                     {
                         fadeScript.red();
                         //red();
@@ -470,7 +349,7 @@ public class ConversationManager : MonoBehaviour
                         //green();
                     }
                 }
-
+               
 
 
 
@@ -478,7 +357,7 @@ public class ConversationManager : MonoBehaviour
             }
         }
     }
-
+    
 
     void SetChoiceButtonActions(int id, int numOfChoices)
     {
@@ -505,8 +384,6 @@ public class ConversationManager : MonoBehaviour
 
     void OnChoiceButtonClick(int choiceTo, int choiceID)
     {
-        isChoiceBtnClicked = true;
-        Debug.Log(choiceTo);
         DisplayDialogue(choiceTo);
     }
 
@@ -515,17 +392,10 @@ public class ConversationManager : MonoBehaviour
         nextButton.SetActive(true);
         nextButton.GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
         nextButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => DisplayDialogue(nextID));
-
     }
-
-
 
     void ClearChoiceButtons()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            choiceBoxes[i].SetActive(false);
-        }
         choiceGroupImg.SetActive(false);
     }
 
@@ -611,18 +481,11 @@ public class ConversationManager : MonoBehaviour
         }
     }
 
-    void UpdateHPUI(int id)
+        void UpdateHPUI(int id)
     {
         int hpValue = (int)dialogueData[id]["HP"];
         currentHP += hpValue;
-
-        if (currentHP > 3)
-        {
-            currentHP = 3;
-        }
-
         Debug.Log("현재체력:" + currentHP + " 깎인 체력:" + hpValue);
-
         for (int i = 0; i < maxHP; i++)
         {
             if (i < currentHP)
@@ -634,59 +497,38 @@ public class ConversationManager : MonoBehaviour
                 lifeCases[i].gameObject.SetActive(false);
             }
         }
+
+        if (currentHP <= 0)
+        {
+            // 게임 오버 로직 추가
+            Debug.Log("게임 오버");
+        }
     }
 
-        void UpdateMiddleImage(string imageName)
+    void UpdateMiddleImage(string imageName)
+    {
+        if (imageName != "-1")
         {
-            if (imageName != "-1")
+            if (imageName == "0")
             {
-                if (imageName == "0")
+                // 이미지 삭제
+                middleImage.sprite = null; // 이미지 제거
+                middleImage.color = new Color(1f, 1f, 1f, 0f);
+            }
+            else
+            {
+                // 새로운 이미지 표시 (Resources/Image 경로에 있는 파일을 불러와 표시)
+                Sprite middleSprite = Resources.Load<Sprite>("Image/" + imageName);
+                if (middleSprite != null)
                 {
-                    // 이미지 삭제
-                    middleImage.sprite = null; // 이미지 제거
-                    middleImage.color = new Color(1f, 1f, 1f, 0f);
-                }
-                else
-                {
-                    // 새로운 이미지 표시 (Resources/Image 경로에 있는 파일을 불러와 표시)
-                    Sprite middleSprite = Resources.Load<Sprite>("Image/" + imageName);
-                    if (middleSprite != null)
-                    {
-                        middleImage.sprite = middleSprite;
-                        middleImage.color = new Color(1f, 1f, 1f, 1f);
-                    }
+                    middleImage.sprite = middleSprite;
+                    middleImage.color = new Color(1f, 1f, 1f, 1f);
                 }
             }
-
-
         }
 
-    void ChangeImage()
-    {
-        // 이미지 변경
-        BackGround_img.sprite = endImage;
-        BackGround_img_shake.sprite = endImage;
-
-        // Dotween을 사용하여 이미지를 서서히 나타나게 함
-        BackGround_img.DOColor(Color.white, 3f);
-        BackGround_img_shake.DOColor(Color.white, 3f).OnComplete(()=> Ending());
-    }
-    void Ending()
-    {
-        ChaArea_Canvas.alpha = 1;
-        TextBox_img.gameObject.SetActive(true);
-        save_btn.gameObject.SetActive(false);
-        load_btn.gameObject.SetActive(false);
-        Invoke("LoadTitleScene",3);
-
 
     }
-
-    void LoadTitleScene()
-    {
-        SceneManager.LoadScene("Title");
-    }
-}
     [System.Serializable]
     public class GameSnapshot
     {
@@ -699,6 +541,6 @@ public class ConversationManager : MonoBehaviour
             CurrentHP = currentHP;
         }
     }
-
+}
 
 
