@@ -1,0 +1,30 @@
+diff a/Gamebook/Assets/Scripts/ConversationManager.cs b/Gamebook/Assets/Scripts/ConversationManager.cs	(rejected hunks)
+@@ -100,26 +100,12 @@
+         {
+             snapshots = JsonUtility.FromJson<Dictionary<int, GameSnapshot>>(PlayerPrefs.GetString("Snapshots"));
+         }
+-
+-        // ������ ǥ�õ� �̹��� �̸� �ҷ�����
+-        string lastImageName = PlayerPrefs.GetString("LastImageName", "");
+-        lastMiddleImageName = PlayerPrefs.GetString("LastMiddleImageName", "");
+-
+-        // �̹��� �����̸��� ���� ��쿡�� ������Ʈ
+-        if (!string.IsNullOrEmpty(savedImageName))
+-        {
+-            UpdateBGImage(savedImageName);
+-        }
+-        if (!string.IsNullOrEmpty(savedMiddleImageName))
+-        {
+-            UpdateMiddleImage(savedMiddleImageName);
+-        }
+-
+-
+         // �ٸ� ������ �ҷ�����...
+         // �߰����� ����...
+     }
+ 
++
++
+     // ���� ��ư�� ������ �� ȣ��Ǵ� �޼���
+     public void OnSaveButtonClicked()
+     {
