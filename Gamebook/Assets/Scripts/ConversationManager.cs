@@ -277,6 +277,8 @@ public class ConversationManager : MonoBehaviour
                 }
 
                 string dialogContent = dialogueData[idx]["Dialog"].ToString();
+                dialogContent = dialogContent.Replace("\\n", "\n").Replace("@@", "\"");
+
                 dialogueText.text = dialogContent;
 
                 int isChoice = (int)dialogueData[idx]["IsChoice"];
